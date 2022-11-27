@@ -3,7 +3,7 @@ const fs = require('fs')
 
 const server = http.createServer((req, res) => {  // req:request; res:response
     console.log(req.url, req.method);
-
+   
     // set header content type
     //res.setHeader('Content-type', 'text/plain');
     //res.write('hello, ninjas');  // what content we want to send back to the browser
@@ -18,7 +18,7 @@ const server = http.createServer((req, res) => {  // req:request; res:response
     res.setHeader('Content-type', 'text/html'); // send back HTML
 
     let path ='./views/';
-    switch(req.url) {
+    switch(req.url) {        
         case '/index':
             path += 'index.html';
             res.statusCode = 200;
