@@ -7,7 +7,7 @@ const server = http.createServer((req, res) => {  // req:request; res:response
     // set header content type
     //res.setHeader('Content-type', 'text/plain');
     //res.write('hello, ninjas');  // what content we want to send back to the browser
-    
+
     // res.setHeader('Content-type', 'text/html'); // send back HTML 
     // res.write('<head><link rel="stylesheet" href="#"></head>');   
     // res.write('<p>hello, ninjas</p>');
@@ -17,8 +17,8 @@ const server = http.createServer((req, res) => {  // req:request; res:response
     // set header content type
     res.setHeader('Content-type', 'text/html'); // send back HTML
 
-    let path ='./views/';
-    switch(req.url) {
+    let path = './views/';
+    switch (req.url) {
         case '/index':
             path += 'index.html';
             res.statusCode = 200;
@@ -27,7 +27,7 @@ const server = http.createServer((req, res) => {  // req:request; res:response
             path += 'about.html';
             res.statusCode = 200;
             break;
-        case '/about-me':            
+        case '/about-me':
             res.statusCode = 301;
             res.setHeader('Location', '/about')
             res.end();
@@ -39,13 +39,13 @@ const server = http.createServer((req, res) => {  // req:request; res:response
 
     // send a html file
     fs.readFile(path, (err, data) => {
-       if(err) {
+        if (err) {
             console.log(err);
             res.end();
-       } else{
+        } else {
             //res.write(data);
             res.end(data);
-       } 
+        }
     });
 
 });
