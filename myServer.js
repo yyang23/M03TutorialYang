@@ -1,9 +1,20 @@
 const http = require('http');
-const fs = require('fs')
+const fs = require('fs');
+const _ = require('lodash');
 
 const server = http.createServer((req, res) => {  // req:request; res:response
-    console.log(req.url, req.method);
-   
+    
+    // lodash
+    const num = _.random(0, 20);
+    console.log(num);
+
+    const greet = _.once(() => {
+        console.log('hello');
+    });
+
+    greet();
+    greet();
+
     // set header content type
     //res.setHeader('Content-type', 'text/plain');
     //res.write('hello, ninjas');  // what content we want to send back to the browser
@@ -18,7 +29,11 @@ const server = http.createServer((req, res) => {  // req:request; res:response
     res.setHeader('Content-type', 'text/html'); // send back HTML
 
     let path ='./views/';
-    switch(req.url) {        
+    switch(req.url) {
+        case '/':
+            path += 'index.html';
+            res.statusCode = 200;
+            break;
         case '/index':
             path += 'index.html';
             res.statusCode = 200;
@@ -27,7 +42,7 @@ const server = http.createServer((req, res) => {  // req:request; res:response
             path += 'about.html';
             res.statusCode = 200;
             break;
-        case '/about-me':            
+        case '/about-us':            
             res.statusCode = 301;
             res.setHeader('Location', '/about')
             res.end();
@@ -52,4 +67,4 @@ const server = http.createServer((req, res) => {  // req:request; res:response
 
 server.listen(3000, 'localhost', () => {
     console.log('listening for requests on port 3000');
-})
+});
